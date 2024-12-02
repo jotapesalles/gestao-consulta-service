@@ -1,0 +1,251 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GestaoApplication</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.consultas.gestao</a>
+</div>
+
+<h1>Coverage Summary for Class: GestaoApplication (com.consultas.gestao)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GestaoApplication</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.consultas.gestao;
+&nbsp;
+&nbsp;import com.consultas.gestao.controllers.AgendamentoController;
+&nbsp;import com.consultas.gestao.controllers.LoginController;
+&nbsp;import com.consultas.gestao.models.Consulta;
+&nbsp;import com.consultas.gestao.models.Medico;
+&nbsp;import com.consultas.gestao.models.Paciente;
+&nbsp;import com.consultas.gestao.services.AgendamentoService;
+&nbsp;import com.consultas.gestao.services.NotificacaoService;
+&nbsp;import com.consultas.gestao.services.UsuarioService;
+&nbsp;import java.time.LocalDateTime;
+&nbsp;import java.util.Scanner;
+&nbsp;import org.springframework.boot.autoconfigure.SpringBootApplication;
+&nbsp;
+&nbsp;@SpringBootApplication
+<b class="nc">&nbsp;public class GestaoApplication {</b>
+&nbsp;
+<b class="nc">&nbsp;  private static final Scanner scanner = new Scanner(System.in);</b>
+<b class="nc">&nbsp;  private static final UsuarioService usuarioService = new UsuarioService();</b>
+<b class="nc">&nbsp;  private static final AgendamentoService agendamentoService = new AgendamentoService();</b>
+<b class="nc">&nbsp;  private static final NotificacaoService notificacaoService = new NotificacaoService();</b>
+&nbsp;
+<b class="nc">&nbsp;  private static final AgendamentoController agendamentoController =</b>
+&nbsp;      new AgendamentoController(agendamentoService, notificacaoService);
+<b class="nc">&nbsp;  private static final LoginController loginController = new LoginController(usuarioService);</b>
+&nbsp;
+&nbsp;  public static void main(String[] args) {
+&nbsp;
+&nbsp;    while (true) {
+<b class="nc">&nbsp;      exibirMenu();</b>
+<b class="nc">&nbsp;      int opcao = scanner.nextInt();</b>
+<b class="nc">&nbsp;      scanner.nextLine(); // Consumir a nova linha após a escolha</b>
+&nbsp;
+<b class="nc">&nbsp;      switch (opcao) {</b>
+&nbsp;        case 1:
+<b class="nc">&nbsp;          cadastrarPaciente();</b>
+&nbsp;          break;
+&nbsp;        case 2:
+<b class="nc">&nbsp;          cadastrarMedico();</b>
+&nbsp;          break;
+&nbsp;        case 3:
+<b class="nc">&nbsp;          agendarConsulta();</b>
+&nbsp;          break;
+&nbsp;        case 4:
+<b class="nc">&nbsp;          listarConsultas();</b>
+&nbsp;          break;
+&nbsp;        case 5:
+<b class="nc">&nbsp;          realizarLogin();</b>
+&nbsp;          break;
+&nbsp;        case 6:
+<b class="nc">&nbsp;          System.out.println(&quot;Saindo...&quot;);</b>
+<b class="nc">&nbsp;          scanner.close();</b>
+&nbsp;          return;
+&nbsp;        default:
+<b class="nc">&nbsp;          System.out.println(&quot;Opção inválida! Tente novamente.&quot;);</b>
+&nbsp;      }
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  static void exibirMenu() {
+<b class="nc">&nbsp;    System.out.println(&quot;==== Menu de Gestão de Consultas ====&quot;);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;1. Cadastrar paciente&quot;);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;2. Cadastrar médico&quot;);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;3. Agendar consulta&quot;);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;4. Listar consultas&quot;);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;5. Realizar login&quot;);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;6. Sair&quot;);</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Escolha uma opção: &quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  static void cadastrarPaciente() {
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o nome do paciente: &quot;);</b>
+<b class="nc">&nbsp;    String nomePaciente = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o email do paciente: &quot;);</b>
+<b class="nc">&nbsp;    String emailPaciente = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite a senha do paciente: &quot;);</b>
+<b class="nc">&nbsp;    String senhaPaciente = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o CPF do paciente: &quot;);</b>
+<b class="nc">&nbsp;    String cpfPaciente = scanner.nextLine();</b>
+<b class="nc">&nbsp;    Paciente paciente = new Paciente(nomePaciente, emailPaciente, senhaPaciente, cpfPaciente);</b>
+<b class="nc">&nbsp;    usuarioService.cadastrarUsuario(paciente);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;Paciente cadastrado com sucesso!&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;   static void cadastrarMedico() {
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o nome do médico: &quot;);</b>
+<b class="nc">&nbsp;    String nomeMedico = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o email do médico: &quot;);</b>
+<b class="nc">&nbsp;    String emailMedico = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite a senha do médico: &quot;);</b>
+<b class="nc">&nbsp;    String senhaMedico = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o CRM do médico: &quot;);</b>
+<b class="nc">&nbsp;    String crmMedico = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite a especialidade do médico: &quot;);</b>
+<b class="nc">&nbsp;    String especialidadeMedico = scanner.nextLine();</b>
+<b class="nc">&nbsp;    Medico medico =</b>
+&nbsp;        new Medico(nomeMedico, emailMedico, senhaMedico, crmMedico, especialidadeMedico);
+<b class="nc">&nbsp;    usuarioService.cadastrarUsuario(medico);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;Médico cadastrado com sucesso!&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  static void agendarConsulta() {
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o nome do paciente para agendamento: &quot;);</b>
+<b class="nc">&nbsp;    String pacienteNome = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o nome do médico para agendamento: &quot;);</b>
+<b class="nc">&nbsp;    String medicoNome = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite a data da consulta (exemplo: 2024-12-10T10:30): &quot;);</b>
+<b class="nc">&nbsp;    String dataConsulta = scanner.nextLine();</b>
+<b class="nc">&nbsp;    Paciente pacienteAgendamento = new Paciente(pacienteNome, &quot;&quot;, &quot;&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;    Medico medicoAgendamento = new Medico(medicoNome, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;    Consulta consulta =</b>
+<b class="nc">&nbsp;        new Consulta(pacienteAgendamento, medicoAgendamento, LocalDateTime.parse(dataConsulta));</b>
+<b class="nc">&nbsp;    agendamentoController.agendarConsulta(consulta);</b>
+<b class="nc">&nbsp;    System.out.println(&quot;Consulta agendada com sucesso!&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  static void listarConsultas() {
+<b class="nc">&nbsp;    agendamentoController.listarConsultas();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  static void realizarLogin() {
+<b class="nc">&nbsp;    System.out.print(&quot;Digite o email: &quot;);</b>
+<b class="nc">&nbsp;    String email = scanner.nextLine();</b>
+<b class="nc">&nbsp;    System.out.print(&quot;Digite a senha: &quot;);</b>
+<b class="nc">&nbsp;    String senha = scanner.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;    boolean loginSucesso = loginController.login(email, senha);</b>
+&nbsp;
+<b class="nc">&nbsp;    if (loginSucesso) {</b>
+<b class="nc">&nbsp;      System.out.println(&quot;Login bem-sucedido!&quot;);</b>
+&nbsp;    } else {
+<b class="nc">&nbsp;      System.out.println(&quot;Credenciais inválidas ou bloqueio de tentativas.&quot;);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-01 23:13</div>
+</div>
+</body>
+</html>
